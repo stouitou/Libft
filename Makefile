@@ -89,7 +89,8 @@ OBJ = ${addprefix ${OBJ_DIR}/, ${SRC:.c=.o}}
 
 HDR_DIR = ./hdr
 HDR = libft.h \
-		ft_printf.h
+		ft_printf.h \
+		get_next_line.h
 INCLUDE = ${addprefix ${HDR_DIR}/, ${HDR}}
 
 CC = cc
