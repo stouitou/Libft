@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   print_up_hexadecimal.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2024/07/10 15:00:34 by stouitou          #+#    #+#             */
+/*   Updated: 2024/07/10 15:38:40 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "ft_printf.h"
 
-# include "libft.h"
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+void	print_up_hexadecimal(int fd, t_print *info, size_t nbr)
+{
+	print_prefix(fd, info);
+	puthexadecimal(fd, info, nbr, UP_HEXABASE);
+	print_suffix(fd, info);
+	info->flag = 0;
+	info->color = 0;
+}

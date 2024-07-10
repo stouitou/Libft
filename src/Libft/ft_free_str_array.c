@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_free_str_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2024/05/02 14:46:59 by stouitou          #+#    #+#             */
+/*   Updated: 2024/05/02 14:51:24 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
+void	ft_free_str_array(char **array)
+{
+	int	i;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+	if (array == NULL)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	array = NULL;
+}

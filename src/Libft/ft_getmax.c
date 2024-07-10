@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_getmax.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2024/04/17 12:52:01 by stouitou          #+#    #+#             */
+/*   Updated: 2024/04/17 12:52:59 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+int	ft_getmax(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}

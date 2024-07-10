@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   print_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2023/11/27 10:36:12 by stouitou          #+#    #+#             */
+/*   Updated: 2024/07/10 15:38:09 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "ft_printf.h"
 
-# include "libft.h"
+static void	putunsigned(int fd, t_print *info, size_t nbr)
+{
+	char	c;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
+	if (nbr >= 10)
+		putunsigned(fd, info, nbr / 10);
+	c = nbr % 10 + '0';
+	info->length += write(fd, &c, 1);
+}
 
-char	*get_next_line(int fd);
-
-#endif
+void	print_unsigned(int fd, t_print *info, size_t nbr)
+{
+	print_prefix(fd, info);
+	putunsigned(fd, info, nbr);
+	print_suffix(fd, info);
+	info->flag = 0;
+	info->color = 0;
+}

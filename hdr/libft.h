@@ -6,7 +6,7 @@
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:33:09 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 11:08:28 by stouitou         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:09:10 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ size_t	ft_count_words(const char *s, char *charset);
 size_t	ft_strlen(const char *s);
 size_t	ft_nbrlen(long int n);
 size_t	ft_nbrlen_base(long int n, char *base);
+size_t	ft_str_array_len(char **array);
 char	*ft_strtoupper(const char *str);
 char	*ft_strtolower(const char *str);
+int		ft_getmin(int a, int b);
+int		ft_getmax(int a, int b);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -61,7 +64,9 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_realloc(void *ptr, size_t size);
 char	*ft_strdup(const char *s);
+char	*ft_strndup(const char *s, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -71,6 +76,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putnbr_base_fd(int nb, char *base, int fd);
+void	ft_free_str_array(char **array);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 t_list	*ft_lstnew(void *content);

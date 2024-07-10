@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_getmin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2024/04/17 12:48:08 by stouitou          #+#    #+#             */
+/*   Updated: 2024/04/17 12:50:09 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+int	ft_getmin(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}

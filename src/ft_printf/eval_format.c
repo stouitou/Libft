@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   eval_format.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2024/01/22 11:29:55 by stouitou          #+#    #+#             */
+/*   Updated: 2024/07/10 15:51:25 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "ft_printf.h"
 
-# include "libft.h"
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+int	eval_format(int fd, t_print *info, const char *str, int i)
+{
+	while (!ft_ischarset(str[i], CONVERSIONS))
+	{
+		if (str[i] == '?')
+		{
+			info->flag = COLOR;
+			i++;
+			info->color = ft_atoi(&str[i]);
+			while (ft_isdigit(str[i]))
+				i++;
+		}
+		else
+			i++;
+	}
+	checkcase(fd, info, str[i]);
+	return (i);
+}

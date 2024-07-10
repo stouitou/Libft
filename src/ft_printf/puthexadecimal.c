@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   puthexadecimal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2024/07/10 14:58:20 by stouitou          #+#    #+#             */
+/*   Updated: 2024/07/10 15:52:21 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "ft_printf.h"
 
-# include "libft.h"
+void	puthexadecimal(int fd, t_print *info, size_t nbr, char *base)
+{
+	char	c;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+	if (nbr >= 16)
+		puthexadecimal(fd, info, nbr / 16, base);
+	c = base[nbr % 16];
+	info->length += write(fd, &c, 1);
+}

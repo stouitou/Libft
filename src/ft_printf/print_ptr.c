@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   print_ptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2023/11/27 10:17:55 by stouitou          #+#    #+#             */
+/*   Updated: 2024/07/10 15:37:11 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "ft_printf.h"
 
-# include "libft.h"
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+void	print_ptr(int fd, t_print *info, void *ptr)
+{
+	if (ptr == NULL)
+	{
+		print_str(fd, info, "(nil)");
+		return ;
+	}
+	print_prefix(fd, info);
+	info->length += write(fd, "0x", 2);
+	print_suffix(fd, info);
+	print_low_hexadecimal(fd, info, (size_t)ptr);
+}

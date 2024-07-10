@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:38:15 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:41:18 by stouitou         ###   ########.fr       */
+/*   Created: 2024/07/10 12:15:02 by stouitou          #+#    #+#             */
+/*   Updated: 2024/07/10 12:35:11 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
+char	*ft_strndup(const char *s, size_t n)
+{
+	int		i;
+	int		len;
+	char	*dup;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+	if (!s || n == 0)
+		return (NULL);
+	len = ft_getmin(ft_strlen(s), n);
+	dup = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (s[i] && i < len)
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
