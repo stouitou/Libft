@@ -1,7 +1,10 @@
 NAME = libft.a
 
-SRC_DIR = ./src
-LIBFT = ft_isalpha.c \
+
+SRC_DIR = src
+
+LIBFT_DIR = Libft
+LIBFT_SRC = ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
 	ft_isascii.c \
@@ -58,8 +61,14 @@ LIBFT = ft_isalpha.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
 	ft_lstmap.c
-GNL = get_next_line.c
-PRINTF = pf_printf.c \
+LIBFT = ${addprefix ${LIBFT_DIR}/, ${LIBFT_SRC}}
+
+GET_NEXT_LINE_DIR = get_next_line
+GET_NEXT_LINE_SRC = get_next_line.c
+GET_NEXT_LINE = ${addprefix ${GET_NEXT_LINE_DIR}/, ${GET_NEXT_LINE_SRC}}
+
+FT_PRINTF_DIR = ft_printf
+FT_PRINTF_SRC = pf_printf.c \
 	pf_eval_format.c \
 	pf_checkcase.c \
 	pf_addprefix.c \
@@ -70,7 +79,10 @@ PRINTF = pf_printf.c \
 	pf_putnbr.c \
 	pf_putu_base.c \
 	pf_unbrlen_base.c
-FPRINTF = fpf_printf.c \
+FT_PRINTF = ${addprefix ${FT_PRINTF_DIR}/, ${FT_PRINTF_SRC}}
+
+FT_FPRINTF_DIR = ft_fprintf
+FT_FPRINTF_SRC = fpf_printf.c \
 	fpf_eval_format.c \
 	fpf_checkcase.c \
 	fpf_print_prefix.c \
@@ -79,19 +91,24 @@ FPRINTF = fpf_printf.c \
 	fpf_putptr.c \
 	fpf_putnbr.c \
 	fpf_putu_base.c
-SRC = ${LIBFT} \
-	${GNL} \
-	${PRINTF} \
-	${FPRINTF}
+FT_FPRINTF = ${addprefix ${FT_FPRINTF_DIR}/, ${FT_FPRINTF_SRC}}
 
-OBJ_DIR = ./obj
+SRC = ${LIBFT} \
+	${GET_NEXT_LINE} \
+	${FT_PRINTF} \
+	${FT_FPRINTF}
+
+
+OBJ_DIR = obj
 OBJ = ${addprefix ${OBJ_DIR}/, ${SRC:.c=.o}}
 
-HDR_DIR = ./hdr
+
+HDR_DIR = hdr
 HDR = libft.h \
 		ft_printf.h \
 		get_next_line.h
 INCLUDE = ${addprefix ${HDR_DIR}/, ${HDR}}
+
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I${HDR_DIR}
@@ -101,7 +118,7 @@ CFLAGS = -Wall -Wextra -Werror -I${HDR_DIR}
 all: ${NAME}
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INCLUDE}
-	@mkdir -p ${OBJ_DIR}
+	@mkdir -p ${dir $@}
 	${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}: ${OBJ}
