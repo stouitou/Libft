@@ -6,92 +6,77 @@
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:04:44 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 12:40:51 by stouitou         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:04:26 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	found_new_line(char *stash)
+static int	found_new_line(char *str)
 {
 	int	i;
 
+	if (str == NULL)
+		return (0);
 	i = 0;
-	while (stash && stash[i])
+	while (str[i])
 	{
-		if (stash[i] == '\n')
+		if (str[i] == '\n')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-static char	*stash_buffer(int fd, char *buffer, char *stash)
+static char	*get_line(int fd, char *str, char *buffer)
 {
-	char	*tmp;
 	int		got;
+	char	*tmp;
 
-	if (found_new_line(stash))
-		return (stash);
-	while (1)
+	if (str)
+	{
+		if (found_new_line(str))
+			return (str);
+	}
+	got = 1;
+	while (got)
 	{
 		got = read(fd, buffer, BUFFER_SIZE);
-		if (got == -1)
+		if (got < 0)
 			return (NULL);
 		if (got == 0)
 			break ;
 		buffer[got] = '\0';
-		tmp = ft_strjoin(stash, buffer);
-		if (tmp == NULL)
-			return (NULL);
-		free(stash);
-		stash = tmp;
-		if (found_new_line(stash))
+		tmp = ft_strjoin(str, buffer);
+		free(str);
+		str = tmp;
+		if (found_new_line(buffer))
 			break ;
 	}
-	return (stash);
+	return (str);
 }
 
-static char	*extract_line(char *stash)
+static char	*get_more(char *str)
 {
-	char	*line;
 	int		i;
+	char	*tmp;
 
 	i = 0;
-	while (stash && stash[i])
-	{
-		if (stash[i] == '\n')
-		{
-			i++;
-			break ;
-		}
+	while (str[i] && str[i] != '\n')
 		i++;
+	tmp = ft_substr(str, i + 1, ft_strlen(str) - i);
+	if (tmp == NULL)
+	{
+		free(str);
+		exit (1);
 	}
-	line = ft_strndup(stash, i);
-	if (line == NULL)
+	if (tmp[0] == '\0')
+	{
+		free(tmp);
 		return (NULL);
-	return (line);
-}
-
-static char	*clean_up(char **stash)
-{
-	char	*clean;
-	int		i;
-
-	i = 0;
-	while (*stash && (*stash)[i])
-	{
-		if ((*stash)[i] == '\n')
-		{
-			i++;
-			break ;
-		}
-		i++;
 	}
-	clean = ft_strdup(*stash + i);
-	free(*stash);
-	*stash = clean;
-	return (*stash);
+	str[i + 1] = '\0';
+	return (tmp);
 }
 
 char	*get_next_line(int fd)
@@ -102,20 +87,13 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buffer == NULL)
-	{
-		ft_free_str_array(stash);
 		return (NULL);
-	}
-	stash[fd] = stash_buffer(fd, buffer, stash[fd]);
+	line = get_line(fd, stash[fd], buffer);
 	free(buffer);
-	if (stash[fd] == NULL)
-	{
-		ft_free_str_array(stash);
+	if (line == NULL)
 		return (NULL);
-	}
-	line = extract_line(stash[fd]);
-	clean_up(&(stash[fd]));
+	stash[fd] = get_more(line);
 	return (line);
 }

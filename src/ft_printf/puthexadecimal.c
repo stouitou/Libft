@@ -6,13 +6,13 @@
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 14:58:20 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 15:52:21 by stouitou         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:06:06 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	puthexadecimal(int fd, t_print *info, size_t nbr, char *base)
+void	puthexadecimal(int fd, t_print *info, unsigned long nbr, char *base)
 {
 	char	c;
 

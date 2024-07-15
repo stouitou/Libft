@@ -3,7 +3,7 @@ NAME = libft.a
 
 SRC_DIR = src
 
-LIBFT_DIR = Libft
+LIBFT_DIR = libft
 LIBFT_SRC = ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
@@ -87,7 +87,8 @@ FT_PRINTF_SRC = ft_printf.c \
 	print_nbr.c \
 	print_unsigned.c \
 	print_low_hexadecimal.c \
-	print_up_hexadecimal.c
+	print_up_hexadecimal.c \
+	reset_info.c
 FT_PRINTF = ${addprefix ${FT_PRINTF_DIR}/, ${FT_PRINTF_SRC}}
 
 SRC = ${LIBFT} \
@@ -110,21 +111,31 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I${HDR_DIR}
 
 
+# COLOR
+YELLOW = \033[38;5;220m
+RED = \033[1;31m
+GREEN = \033[0;32m
+BLUE = \033[1;34m
+RESET = \033[0m
+
+
 
 all: ${NAME}
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INCLUDE}
+	@echo "Compiling $<"
 	@mkdir -p ${dir $@}
-	${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}: ${OBJ}
-	ar -rcs ${NAME} ${OBJ}
+	@ar -rcs ${NAME} ${OBJ}
+	@echo "${GREEN}Libft - Compilation complete.${RESET}"
 
 clean:
-	rm -rf ${OBJ_DIR}
+	@rm -rf ${OBJ_DIR}
 
 fclean: clean
-	rm -f ${NAME}
+	@rm -f ${NAME}
 
 re: fclean all
 

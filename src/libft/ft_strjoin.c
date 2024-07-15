@@ -1,19 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_suffix.c                                     :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 15:03:00 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/11 14:05:34 by stouitou         ###   ########.fr       */
+/*   Created: 2023/11/13 11:28:27 by stouitou          #+#    #+#             */
+/*   Updated: 2024/07/11 13:05:14 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	print_suffix(int fd, t_print *info)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	if (info->quest)
-		ft_putstr_fd("\033[0m", fd);
+	char			*str;
+	unsigned int	i;
+	unsigned int	j;
+
+	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (s1 && s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2 && s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }

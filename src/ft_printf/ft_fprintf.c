@@ -6,18 +6,22 @@
 /*   By: stouitou <stouitou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 09:36:25 by stouitou          #+#    #+#             */
-/*   Updated: 2024/07/10 15:51:31 by stouitou         ###   ########.fr       */
+/*   Updated: 2024/07/12 14:12:45 by stouitou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static t_print	*initialize_info(t_print *info)
+static void	initialize_info(t_print *info)
 {
-	info->flag = 0;
+	info->conversion = 0;
+	info->hash = 0;
+	info->plus = 0;
+	info->space = 0;
+	info->width = 0;
+	info->quest = 0;
 	info->color = 0;
 	info->length = 0;
-	return (info);
 }
 
 int	ft_fprintf(int fd, const char *format, ...)
